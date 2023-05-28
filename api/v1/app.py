@@ -5,7 +5,7 @@ Flask Application
 
 from models import storage
 from api.v1.views import app_views
-from flask import Flask, render_template, make_response
+from flask import Flask, jsonify, make_response
 from os import environ
 
 
