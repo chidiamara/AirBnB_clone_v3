@@ -24,7 +24,7 @@ def close_db(error):
 
 @app.errorhandler(404)
 def invalid_route(e):
-    """Handle all 404 errors"""
+    """Handle all 404 errors."""
     return jsonify({"error": "Not found"})
 
 
