@@ -76,7 +76,7 @@ class FileStorage:
         """retreives an object"""
         for items in classes:
             if cls is classes[items]:
-                return len(self.__objects
+                return len(self.__objects.cls.id)
             else:
                 return None
 
