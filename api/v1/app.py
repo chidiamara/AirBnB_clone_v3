@@ -22,6 +22,12 @@ def close_db(error):
     storage.close()
 
 
+@app.errorhandler(404)
+def invalid_route(e):
+    """Handle all 404 errors"""
+    return jsonify({"error": "Not found"})
+
+
 if __name__ == "__main__":
     """ Main Function
     The entry point of the application.
