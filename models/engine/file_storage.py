@@ -74,18 +74,16 @@ class FileStorage:
 
     def get(self, cls, id):
         """retreives an object"""
-        for i in classes:
-            if cls is classes[i]:
-                key = cls + '.' + id
-                return len(self.__objects[key])
+        for items in classes:
+            if cls is classes[items]:
+                return len(self.__objects
             else:
                 return None
 
     def count(self, cls=None):
         """counts the number of objects in storage"""
-        for i in classes:
-            if cls is classes[i]:
-                seels = str(cls)
+        for items in classes:
+            if cls is classes[items]:
                 return (len(self.__objects))
             else:
                 return (len(self.__objects))
