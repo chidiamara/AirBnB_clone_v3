@@ -11,9 +11,6 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-import sqlalchemy
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -73,17 +70,13 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
-        """retreives an object"""
+        """method to retrieve one object"""
         for items in classes:
-            if cls is classes[items]:
-                return len(self.__objects.cls.id)
-            else:
-                return None
+            if cls is items:
+                key = items + '.' + id
+                return self.__objects[key]
+        return None
 
     def count(self, cls=None):
-        """counts the number of objects in storage"""
-        for items in classes:
-            if cls is classes[items]:
-                return (len(self.__objects))
-            else:
-                return (len(self.__objects))
+        """method to count the number of objects in storage"""
+        return len(self.all(cls))

@@ -77,18 +77,12 @@ class DBStorage:
 
     def get(self, cls, id):
         """retreives an object"""
-        for i in classes:
-            if cls is classes[i]:
-                ls = classes[i].to_dict()
-                return ls[id]
-            else:
-                return None
+        for items in classes:
+            if cls is items:
+                key = items + '.' + id
+                return self.__objects[key]
+        return None
 
     def count(self, cls=None):
         """counts the number of objects in storage"""
-        for i in classes:
-            if cls is classes[i] or cls is i:
-                seels = cls.to_dict()
-                return (len(seels))
-            else:
-                return 2
+        return len(self.all(cls))
