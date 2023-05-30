@@ -16,7 +16,8 @@ def get_all_amenities():
     """
     Get all amenities
     """
-    all_amenities = [amenity.to_dict() for amenity in storage.all(Amenity).values()]
+    all_amenities = [amenity.to_dict()
+                     for amenity in storage.all(Amenity).values()]
     return jsonify(all_amenities)
 
 
