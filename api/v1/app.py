@@ -8,6 +8,7 @@ from api.v1.views import app_views
 from flask import Flask, jsonify, make_response
 from os import environ
 from flask_cors import CORS
+from flasgger import Swagger
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -27,6 +28,15 @@ def close_db(error):
 def invalid_route(e):
     """Handle all 404 errors"""
     return jsonify({"error": "Not found"})
+
+
+app.config['SWAGGER'] = {
+    'title': 'AirBnB clone - RESTful API',
+    'description': 'This API was created for the HBNB RESTful API project.\n'
+    'It provides endpoints for managing various\n'
+    'resources in the AirBnB clone project.',
+    'uiversion': 3
+}
 
 
 if __name__ == "__main__":
