@@ -76,7 +76,7 @@ class DBStorage:
         self.__session.remove()
 
     def get(self, cls, id):
-        """
+      """
         Retrieves an object based on the class and ID.
 
         Args:
@@ -105,7 +105,4 @@ class DBStorage:
             int: The count of items in the dataset.
 
         """
-        data = self.all(cls)
-        if cls in classes.values():
-            data = self.all(cls)
-        return len(data)
+        return len(self.all(cls))

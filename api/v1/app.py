@@ -7,8 +7,8 @@ from models import storage
 from api.v1.views import app_views
 from flask import Flask, jsonify, make_response
 from os import environ
-from flask_cors import CORS
 from flasgger import Swagger
+
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -26,7 +26,7 @@ def close_db(error):
 
 @app.errorhandler(404)
 def invalid_route(e):
-    """Handle all 404 errors"""
+    """Handle all 404 errors."""
     return jsonify({"error": "Not found"})
 
 

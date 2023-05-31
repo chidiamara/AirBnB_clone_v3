@@ -102,7 +102,4 @@ class FileStorage:
             int: The count of items in the dataset.
 
         """
-        data = self.all(cls)
-        if cls in classes.values():
-            data = self.all(cls)
-        return len(data)
+         return len(self.all(cls))

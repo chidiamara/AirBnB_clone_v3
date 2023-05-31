@@ -66,6 +66,7 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue(hasattr(amenity, "id"))
         self.assertTrue(hasattr(amenity, "created_at"))
         self.assertTrue(hasattr(amenity, "updated_at"))
+        amenity.delete()
 
     def test_name_attr(self):
         """Test that Amenity has attribute name, and it's as an empty string"""
@@ -75,11 +76,11 @@ class TestAmenity(unittest.TestCase):
             self.assertEqual(amenity.name, None)
         else:
             self.assertEqual(amenity.name, "")
+        amenity.delete()
 
     def test_to_dict_creates_dict(self):
         """test to_dict method creates a dictionary with proper attrs"""
         am = Amenity()
-        print(am.__dict__)
         new_d = am.to_dict()
         self.assertEqual(type(new_d), dict)
         self.assertFalse("_sa_instance_state" in new_d)
@@ -87,6 +88,7 @@ class TestAmenity(unittest.TestCase):
             if attr is not "_sa_instance_state":
                 self.assertTrue(attr in new_d)
         self.assertTrue("__class__" in new_d)
+        am.delete()
 
     def test_to_dict_values(self):
         """test that values in dict returned from to_dict are correct"""
@@ -98,9 +100,11 @@ class TestAmenity(unittest.TestCase):
         self.assertEqual(type(new_d["updated_at"]), str)
         self.assertEqual(new_d["created_at"], am.created_at.strftime(t_format))
         self.assertEqual(new_d["updated_at"], am.updated_at.strftime(t_format))
+        am.delete()
 
     def test_str(self):
         """test that the str method has the correct output"""
         amenity = Amenity()
         string = "[Amenity] ({}) {}".format(amenity.id, amenity.__dict__)
         self.assertEqual(string, str(amenity))
+        amenity.delete()
