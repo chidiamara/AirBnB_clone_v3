@@ -11,6 +11,9 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+import sqlalchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -70,13 +73,33 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
-        """method to retrieve one object"""
-        for items in classes:
-            if cls is items:
-                key = items + '.' + id
-                return self.__objects[key]
+        """
+        Retrieves an object based on the class and ID.
+
+        Args:
+            cls (class): The class of the object to retrieve.
+            id (str): The ID of the object.
+
+        Returns:
+            The retrieved object if found, or None if not found.
+        """
+        if cls in classes.values() and isinstance(id, str):
+            objects = self.all(cls)
+            for key, value in objects.items():
+                if key.split(".")[1] == id:
+                    return value
         return None
 
     def count(self, cls=None):
-        """method to count the number of objects in storage"""
-        return len(self.all(cls))
+        """
+        Count the number of items in the dataset.
+
+        Args:
+            cls (optional): The class to filter the dataset.
+            If None, count all items.
+
+        Returns:
+            int: The count of items in the dataset.
+
+        """
+         return len(self.all(cls))
